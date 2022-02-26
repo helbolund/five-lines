@@ -43,3 +43,9 @@ Inline the method at every call site and delete the method
 3. Wherever the compiler give errors, replace the call with the copied body and map the arguments to the parameters
 4. Once we can compile without errors we know the original method is unused. Delete the original method
 
+### 4.2.2 SPECIALIZE METHOD
+This is esoteric because it goes against the instincts of many programmers. Specialized methods, the opposite of generalzied method, are called fewer places and hence becomes unused sooner...
+1. Duplicate the method we want to specialize
+2. Rename one of the methods to a new parameter name, and remove (or replace) the parameter we are using as the basis of our specialization
+3. Correct the method accordingly so it has no errors
+4. Swith the old calls over to use the new ones
