@@ -15,35 +15,28 @@ enum Tile {
 }
 
 interface Input {
-  isRight(): boolean;
-  isLeft(): boolean;
-  isUp(): boolean;
-  isDown(): boolean;
+  handle(): void;
 }
 
 class Right implements Input {
-  isRight(): boolean { return true; }
-  isLeft(): boolean { return false; }
-  isUp(): boolean { return false; }
-  isDown(): boolean { return false; }
+  handle() {
+    moveHorizontal(1);
+  }
 }
 class Left implements Input {
-  isRight(): boolean { return false; }
-  isLeft(): boolean { return true; }
-  isUp(): boolean { return false; }
-  isDown(): boolean { return false; }
+  handle() {
+    moveHorizontal(-1);
+  }
 }
 class Up implements Input {
-  isRight(): boolean { return false; }
-  isLeft(): boolean { return false; }
-  isUp(): boolean { return true; }
-  isDown(): boolean { return false; }
+  handle() {
+    moveVertical(-1);
+  }
 }
 class Down implements Input {
-  isRight(): boolean { return false; }
-  isLeft(): boolean { return false; }
-  isUp(): boolean { return false; }
-  isDown(): boolean { return true; }
+  handle() {
+    moveVertical(1);
+  }
 }
 
 let playerx = 1;
@@ -145,14 +138,7 @@ function handleInputs() {
 }
 
 function handleInput(input: Input) {
-  if (input.isLeft())
-    moveHorizontal(-1);
-  else if (input.isRight())
-    moveHorizontal(1);
-  else if (input.isUp())
-    moveVertical(-1);
-  else if (input.isDown())
-    moveVertical(1);
+  input.handle();
 }
 
 function draw() {
@@ -214,6 +200,7 @@ const LEFT_KEY = "ArrowLeft";
 const UP_KEY = "ArrowUp";
 const RIGHT_KEY = "ArrowRight";
 const DOWN_KEY = "ArrowDown";
+
 window.addEventListener("keydown", e => {
   if (e.key === LEFT_KEY || e.key === "a") inputs.push(new Left());
   else if (e.key === UP_KEY || e.key === "w") inputs.push(new Up());
