@@ -17,3 +17,29 @@ Map third party types into types we control
 Stand alone ***if***s are considered checks and ok at the start, ***if-else*** are decisions
 
 Aim for late binding rather than early binding as else-if dictates. Also change by addition
+
+### 4.1.3 REPLACE TYPE CODE WITH CLASSES
+This refactoring pattern transforms an *enum* into an *interface*, and the enum's values becomes *classes*
+1. Introduce new interface with temporary name. The interface should contain methods for each of the values in the enum
+2. Create classes for each of the enums values. All methods except for the one corresponding to the class should `return false`
+3. Rename the enum resulting in compiler errors
+4. Change types from the old name to the temporary name and replace equality checks with the new methods
+5. Replace remaining references to the enum values with instantiating the new classes, instead
+6. When there are no more errors, rename the interface to its permanent name everywhere
+
+
+### 4.1.5 PUSH CODE INTO CLASSES
+1. Copy source method into all classes
+2. Copy the method signature into the interface
+3. Go through the method in all the classes
+    1. Inline methods that return a constant expression (`Red::isRed()` replaced with `true`)
+    2. Perform all computation up front. I.e. remove `if (true)` and `if (false) { ... }` and `false || true` becomes `true` 
+    3. Change the name to a proper name
+4. Replace the body of the original function with a call to our new method
+### 4.1.7 INLINE METHOD
+Inline the method at every call site and delete the method
+1. Change method name to something temporary
+2. Copy the body and note its parameteres
+3. Wherever the compiler give errors, replace the call with the copied body and map the arguments to the parameters
+4. Once we can compile without errors we know the original method is unused. Delete the original method
+
