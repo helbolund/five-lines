@@ -17,6 +17,8 @@ enum RawTile {
 interface Tile {
   color(g: CanvasRenderingContext2D) : void;
   draw(g: CanvasRenderingContext2D, x: number, y: number) : void;
+  isEdible(): boolean;
+  isPushable(): boolean;
   isAir(): boolean;
   isFlux() : boolean;
   isUnbreakable() : boolean;
@@ -32,10 +34,10 @@ interface Tile {
 }
 
 class Air implements Tile {
-  color(g: CanvasRenderingContext2D) {
-  };
-  draw(g: CanvasRenderingContext2D, x: number, y: number) {
-  }    
+  color(g: CanvasRenderingContext2D) {};
+  draw(g: CanvasRenderingContext2D, x: number, y: number) {};
+  isEdible() { return true; }
+  isPushable() { return false; }
   isAir() { return true; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -58,6 +60,8 @@ class Flux implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return true; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return true; };
   isUnbreakable()  { return false; };
@@ -80,6 +84,8 @@ class Unbreakable implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return true; };
@@ -99,6 +105,8 @@ class Player implements Tile {
   };
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -121,6 +129,8 @@ class Stone implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return true; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -143,6 +153,8 @@ class FallingStone implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -165,6 +177,8 @@ class Box implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return true; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -187,6 +201,8 @@ class FallingBox implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -209,6 +225,8 @@ class Key1 implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -231,6 +249,8 @@ class Lock1 implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -253,6 +273,8 @@ class Key2 implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -275,6 +297,8 @@ class Lock2 implements Tile {
     this.color(g);
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
+  isEdible() { return false; }
+  isPushable() { return false; }
   isAir() { return false; };
   isFlux()  { return false; };
   isUnbreakable()  { return false; };
@@ -387,8 +411,7 @@ function moveToTile(newx: number, newy: number) {
 }
 
 function moveHorizontal(dx: number) {
-  if (map[playery][playerx + dx].isFlux()
-    || map[playery][playerx + dx].isAir()) {
+  if (map[playery][playerx + dx].isEdible()) {
     moveToTile(playerx + dx, playery);
   } else if ((map[playery][playerx + dx].isStone()
     || map[playery][playerx + dx].isBox())
@@ -406,8 +429,7 @@ function moveHorizontal(dx: number) {
 }
 
 function moveVertical(dy: number) {
-  if (map[playery + dy][playerx].isFlux()
-    || map[playery + dy][playerx].isAir()) {
+  if (map[playery + dy][playerx].isEdible()) {
     moveToTile(playerx, playery + dy);
   } else if (map[playery + dy][playerx].isKey1()) {
     removeLock1();
