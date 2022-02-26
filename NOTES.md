@@ -49,3 +49,11 @@ This is esoteric because it goes against the instincts of many programmers. Spec
 2. Rename one of the methods to a new parameter name, and remove (or replace) the parameter we are using as the basis of our specialization
 3. Correct the method accordingly so it has no errors
 4. Swith the old calls over to use the new ones
+
+### Rule: 4.2.4 NEVER USE SWTICH
+One problem with switches is the fall-through logic. There is no way for us to tell the compiler if it is intentionally or not.
+
+If a language does ***not*** allow omitting `default` then ***don't*** use `switch` ***at all***.
+
+If a language does allow omitting `default` then `return` in every `case`.
+
