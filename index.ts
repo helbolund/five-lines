@@ -130,11 +130,11 @@ class Stone implements Tile {
   moveVertical(dy: number) {}
   isStoney() { return true; }
   isBoxy() { return false; }
-  isAir() { return false; };
-  isFallingStone()  { return this.falling.isFalling(); };
-  isFallingBox()  { return false; };
-  isLock1()  { return false; };
-  isLock2()  { return false; };
+  isAir() { return false; }
+  isFallingStone()  { return this.falling.isFalling(); }
+  isFallingBox()  { return false; }
+  isLock1()  { return false; }
+  isLock2()  { return false; }
 }
 
 class Box implements Tile {
@@ -160,11 +160,11 @@ class Box implements Tile {
   moveVertical(dy: number) {}
   isStoney() { return false; }
   isBoxy() { return true; }
-  isAir() { return false; };
-  isFallingStone()  { return false; };
-  isFallingBox()  { return false; };
-  isLock1()  { return false; };
-  isLock2()  { return false; };
+  isAir() { return false; }
+  isFallingStone()  { return false; }
+  isFallingBox()  { return this.falling.isFalling(); }
+  isLock1()  { return false; }
+  isLock2()  { return false; }
 }
 
 class FallingBox implements Tile {
@@ -190,11 +190,11 @@ class FallingBox implements Tile {
   moveVertical(dy: number) {}
   isStoney() { return false; }
   isBoxy() { return true; }
-  isAir() { return false; };
-  isFallingStone()  { return false; };
-  isFallingBox()  { return true; };
-  isLock1()  { return false; };
-  isLock2()  { return false; };
+  isAir() { return false; }
+  isFallingStone()  { return false; }
+  isFallingBox()  { return this.falling.isFalling(); }
+  isLock1()  { return false; }
+  isLock2()  { return false; }
 }
 
 class Key1 implements Tile {
