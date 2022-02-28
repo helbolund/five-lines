@@ -96,8 +96,7 @@ class Player implements Tile {
 }
 
 class Stone implements Tile {
-  private falling: boolean;
-  constructor(falling: boolean) {
+  constructor(private falling: boolean) {
     this.falling = falling;
   }
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
