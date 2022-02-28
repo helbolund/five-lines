@@ -96,6 +96,10 @@ class Player implements Tile {
 }
 
 class Stone implements Tile {
+  private falling: boolean;
+  constructor() {
+    this.falling = false;
+  }
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
     g.fillStyle = "#0000cc";
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
@@ -123,6 +127,10 @@ class Stone implements Tile {
 }
 
 class FallingStone implements Tile {
+  private falling: boolean;
+  constructor() {
+    this.falling = true;
+  }
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
     g.fillStyle = "#0000cc";
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
