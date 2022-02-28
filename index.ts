@@ -295,11 +295,15 @@ let inputs: Input[] = [];
 function removeLock1() {
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
-      if (map[y][x].isLock1()) {
+      if (check(map[y][x])) {
         map[y][x] = new Air();
       }
     }
   }
+}
+
+function check(tile: Tile) {
+  return tile.isLock1();
 }
 
 function removeLock2() {
