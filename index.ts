@@ -293,21 +293,20 @@ function transformMap() {
 let inputs: Input[] = [];
 
 class RemoveStrategy {
-
+  check(tile: Tile): boolean {
+    return tile.isLock1();
+  }  
 }
 
 function removeLock1() {
+  let shouldRemove = new RemoveStrategy();
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
-      if (check(map[y][x])) {
+      if (shouldRemove.check(map[y][x])) {
         map[y][x] = new Air();
       }
     }
   }
-}
-
-function check(tile: Tile) {
-  return tile.isLock1();
 }
 
 function removeLock2() {
