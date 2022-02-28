@@ -67,3 +67,17 @@ Editors has a hard time showing unused methods in iterfaces
 3. Compile
     1. If the compile fails, undo and move on
     2. Otherwise, go through each class and check wheter you can delete the same method from it without getting errors
+
+### 5.1.1 UNIFY SIMILAR CLASSES
+Unify classes that differs in a set of constant methods
+1. Make all non-basis methods equal
+    1. In the body of each version of the method, add an enclosing `if (true) { }` adound the existing code
+    2. Replace `true` with an expression calling all the basis methods and comparing their result to their constant values
+    3. Copy the body of each version, and past it with an `else` into all other versions
+2. Now that only the basis methods are different, the second phase begins by introducing a field for each method in the basis and assigning its constant in the constructor
+3. Change the method to return the new fields instead of the constant
+4. Compile to ensure that we have not broken anything yet
+5. For each class, one field at at time:
+    1. Copy the default value of the field, and then make the default value a parameter
+    2. Go through the compiler errors, and insert the default value as an argument
+6. After all the classes are identical, delete all but one of the unified classes, and fix all the compiler errors by switching to the remaining class
