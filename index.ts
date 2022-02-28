@@ -101,10 +101,12 @@ class Stone implements Tile {
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
   moveHorizontal(dx: number): void {
-    if (map[playery][playerx + dx + dx].isAir()
+    if (true) {
+      if (map[playery][playerx + dx + dx].isAir()
         && !map[playery + 1][playerx + dx].isAir()) {
-      map[playery][playerx + dx + dx] = map[playery][playerx + dx];
-      moveToTile(playerx + dx, playery);
+        map[playery][playerx + dx + dx] = map[playery][playerx + dx];
+        moveToTile(playerx + dx, playery);
+      }
     }
   }
   moveVertical(dy: number) {}
@@ -122,7 +124,11 @@ class FallingStone implements Tile {
     g.fillStyle = "#0000cc";
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
-  moveHorizontal(dx: number) {}
+  moveHorizontal(dx: number) {
+    if (true) {
+      
+    }
+  }
   moveVertical(dy: number) {}
   isStoney() { return true; }
   isBoxy() { return false; }
