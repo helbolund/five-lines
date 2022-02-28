@@ -120,7 +120,7 @@ class Stone implements Tile {
   isStoney() { return true; }
   isBoxy() { return false; }
   isAir() { return false; };
-  isFallingStone()  { return false; };
+  isFallingStone()  { return this.falling; };
   isFallingBox()  { return false; };
   isLock1()  { return false; };
   isLock2()  { return false; };
@@ -151,7 +151,7 @@ class FallingStone implements Tile {
   isStoney() { return true; }
   isBoxy() { return false; }
   isAir() { return false; };
-  isFallingStone()  { return true; };
+  isFallingStone()  { return this.falling; };
   isFallingBox()  { return false; };
   isLock1()  { return false; };
   isLock2()  { return false; };
