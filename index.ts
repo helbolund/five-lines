@@ -16,19 +16,16 @@ enum RawTile {
 
 interface FallingState {
   isFalling(): boolean;
-  isResting(): boolean;
   moveHorizontal(tile: Tile, dx: number): void;
 }
 
 class Falling implements FallingState {
   isFalling() { return true; }
-  isResting() { return false; }
   moveHorizontal(tile: Tile, dx: number) {}
 }
 
 class Resting implements FallingState {
   isFalling() { return false; }
-  isResting() { return true; }
   moveHorizontal(tile: Tile, dx: number) {
     if (map[playery][playerx + dx + dx].isAir()
       && !map[playery + 1][playerx + dx].isAir()) {
