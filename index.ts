@@ -97,8 +97,8 @@ class Player implements Tile {
 
 class Stone implements Tile {
   private falling: boolean;
-  constructor() {
-    this.falling = false;
+  constructor(falling: boolean) {
+    this.falling = falling;
   }
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
     g.fillStyle = "#0000cc";
@@ -128,8 +128,8 @@ class Stone implements Tile {
 
 class FallingStone implements Tile {
   private falling: boolean;
-  constructor() {
-    this.falling = true;
+  constructor(falling: boolean) {
+    this.falling = falling;
   }
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
     g.fillStyle = "#0000cc";
@@ -317,8 +317,8 @@ function transformTile(tile: RawTile) {
     case RawTile.FLUX: return new Flux();
     case RawTile.UNBREAKABLE: return new Unbreakable();
     case RawTile.PLAYER: return new Player();
-    case RawTile.STONE: return new Stone();
-    case RawTile.FALLING_STONE: return new FallingStone();
+    case RawTile.STONE: return new Stone(false);
+    case RawTile.FALLING_STONE: return new FallingStone(true);
     case RawTile.BOX: return new Box();
     case RawTile.FALLING_BOX: return new FallingBox();
     case RawTile.KEY1: return new Key1();
@@ -384,14 +384,14 @@ function updateMap() {
 function updateTile(y: number, x: number) {
   if (map[y][x].isStoney()
     && map[y + 1][x].isAir()) {
-    map[y + 1][x] = new FallingStone();
+    map[y + 1][x] = new FallingStone(true);
     map[y][x] = new Air();
   } else if (map[y][x].isBoxy()
     && map[y + 1][x].isAir()) {
     map[y + 1][x] = new FallingBox();
     map[y][x] = new Air();
   } else if (map[y][x].isFallingStone()) {
-    map[y][x] = new Stone();
+    map[y][x] = new Stone(false);
   } else if (map[y][x].isFallingBox()) {
     map[y][x] = new Box();
   }
