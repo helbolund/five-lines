@@ -101,7 +101,7 @@ class Stone implements Tile {
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
   moveHorizontal(dx: number): void {
-    if (true) {
+    if (this.isFallingStone() === false) {
       if (map[playery][playerx + dx + dx].isAir()
         && !map[playery + 1][playerx + dx].isAir()) {
         map[playery][playerx + dx + dx] = map[playery][playerx + dx];
@@ -125,8 +125,8 @@ class FallingStone implements Tile {
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
   moveHorizontal(dx: number) {
-    if (true) {
-      
+    if (this.isFallingStone() === true) {
+
     }
   }
   moveVertical(dy: number) {}
