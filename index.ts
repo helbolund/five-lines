@@ -126,37 +126,6 @@ class Stone implements Tile {
   isLock2()  { return false; };
 }
 
-class FallingStone implements Tile {
-  private falling: boolean;
-  constructor(falling: boolean) {
-    this.falling = falling;
-  }
-  draw(g: CanvasRenderingContext2D, x: number, y: number) {
-    g.fillStyle = "#0000cc";
-    g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-  }    
-  moveHorizontal(dx: number) {
-    if (this.isFallingStone() === false) {
-      if (map[playery][playerx + dx + dx].isAir()
-        && !map[playery + 1][playerx + dx].isAir()) {
-        map[playery][playerx + dx + dx] = map[playery][playerx + dx];
-        moveToTile(playerx + dx, playery);
-      }
-    }
-    else {
-
-    }
-  }
-  moveVertical(dy: number) {}
-  isStoney() { return true; }
-  isBoxy() { return false; }
-  isAir() { return false; };
-  isFallingStone()  { return this.falling; };
-  isFallingBox()  { return false; };
-  isLock1()  { return false; };
-  isLock2()  { return false; };
-}
-
 class Box implements Tile {
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
     g.fillStyle = "#8b4513";
@@ -318,7 +287,7 @@ function transformTile(tile: RawTile) {
     case RawTile.UNBREAKABLE: return new Unbreakable();
     case RawTile.PLAYER: return new Player();
     case RawTile.STONE: return new Stone(false);
-    case RawTile.FALLING_STONE: return new FallingStone(true);
+    case RawTile.FALLING_STONE: return new Stone(true);
     case RawTile.BOX: return new Box();
     case RawTile.FALLING_BOX: return new FallingBox();
     case RawTile.KEY1: return new Key1();
@@ -384,7 +353,7 @@ function updateMap() {
 function updateTile(y: number, x: number) {
   if (map[y][x].isStoney()
     && map[y + 1][x].isAir()) {
-    map[y + 1][x] = new FallingStone(true);
+    map[y + 1][x] = new Stone(true);
     map[y][x] = new Air();
   } else if (map[y][x].isBoxy()
     && map[y + 1][x].isAir()) {
