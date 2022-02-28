@@ -85,11 +85,21 @@ Unify classes that differs in a set of constant methods
     2. Go through the compiler errors, and insert the default value as an argument
 6. After all the classes are identical, delete all but one of the unified classes, and fix all the compiler errors by switching to the remaining class
 
-### 5-2-1 COMBINE IFS
+### 5.2.1 COMBINE IFS
 Join ifs with identical bodies (may require refactoring to achieve)
 1. Verify that the bodies are indeed the same
 2. Select the code between closing parenthesis of the first `if` and the opening parenthesis of the `else if`, press delete and type `||`. Insert an opening parenthesis after the `if` and a closing parenthesis before `{`. We always keep the parenthesis around the expressions to make sure we do not change the behavior.
 
 ### Rule: 5.3.2 USE PURE CONDITIONS
 ***No side effects, please!***
+
+### Rule: 5.4.2 NO INTERFACE WITH ONLY ONE IMPLEMENTATION
+Never have an interface with only one implementation
+
+### 5.4.4 EXTRACT INTERFACE FROM IMPLEMENTATION
+1. Create a new interface with the same name as the class we are extracting from
+2. Rename the class from which we want to extract the interface, and make it implement the new interface
+3. Compile, and go through the errors:
+    1. If the error is caused by a `new`, change the instantiation to the new class name
+    2. Otherwise, add the method that is causing the error to the interface
 
