@@ -10,7 +10,7 @@ Either ***call*** methods on an object or ***pass*** the object, not both
 - Complete - Capture all the functions does
 - Understandable - Be undestandable for someone working in the domain
 
-### Never use if with else
+### Rule: 4.1.1 Never use if with else
 Unless we are checking against a data type we do not control.
 If elses are hardcoded decisions
 Map third party types into types we control
@@ -57,3 +57,13 @@ If a language does ***not*** allow omitting `default` then ***don't*** use `swit
 
 If a language does allow omitting `default` then `return` in every `case`.
 
+### Rule: 4.3.2 ONLY INHERIT FROM INTERFACES
+See chapter 4.3.2!
+### 4.5.1 TRY DELETE THEN COMPILE
+Editors has a hard time showing unused methods in iterfaces
+
+1. Compile. There should be no errors
+2. Delete a method from the interface
+3. Compile
+    1. If the compile fails, undo and move on
+    2. Otherwise, go through each class and check wheter you can delete the same method from it without getting errors
