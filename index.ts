@@ -54,8 +54,6 @@ interface Tile {
   draw(g: CanvasRenderingContext2D, x: number, y: number) : void;
   moveHorizontal(dx: number) : void;
   moveVertical(dy: number) : void;
-  drop(): void;
-  canFall(): boolean;
   update(x: number, y: number): void;
   isAir(): boolean;
   isLock1() : boolean;
@@ -71,8 +69,6 @@ class Air implements Tile {
   moveVertical(dy: number) {
     moveToTile(playerx, playery + dy);
   }
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return true; };
   isLock1()  { return false; };
@@ -90,8 +86,6 @@ class Flux implements Tile {
   moveVertical(dy: number) {
     moveToTile(playerx, playery + dy);
   }
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return false; };
   isLock1()  { return false; };
@@ -105,8 +99,6 @@ class Unbreakable implements Tile {
   }    
   moveHorizontal(dx: number) {}
   moveVertical(dy: number) {}
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return false; };
   isLock1()  { return false; };
@@ -118,8 +110,6 @@ class Player implements Tile {
   draw(g: CanvasRenderingContext2D, x: number, y: number) {}
   moveHorizontal(dx: number) {}
   moveVertical(dy: number) {}
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return false; };
   isLock1()  { return false; };
@@ -139,8 +129,6 @@ class Stone implements Tile {
     this.fallStrategy.getFalling().moveHorizontal(this, dx);
   }
   moveVertical(dy: number) {}
-  drop() { }
-  canFall() { return true; }
   update(x: number, y: number) {
     this.fallStrategy.update(this, x, y);
   }
@@ -150,33 +138,20 @@ class Stone implements Tile {
 }
 
 class Box implements Tile {
-  constructor(private falling: FallingState) {
-    this.falling = falling;
+  private fallStrategy: FallStrategy;
+  constructor(falling: FallingState) {
+    this.fallStrategy = new FallStrategy(falling);
   }
   draw(g: CanvasRenderingContext2D, x: number, y: number) {
     g.fillStyle = "#8b4513";
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }    
-  moveHorizontal(dx: number) {
-    if (this.falling.isFalling() === false) {
-      if (map[playery][playerx + dx + dx].isAir()
-          && !map[playery + 1][playerx + dx].isAir()) {
-        map[playery][playerx + dx + dx] = map[playery][playerx + dx];
-        moveToTile(playerx + dx, playery);
-      }
-    }
+  moveHorizontal(dx: number): void {
+    this.fallStrategy.getFalling().moveHorizontal(this, dx);
   }
   moveVertical(dy: number) {}
-  drop() { this.falling = new Falling(); }
-  canFall() { return true; }
   update(x: number, y: number) {
-    if (map[y][x].canFall() && map[y + 1][x].isAir()) {
-      map[y][x].drop();
-      map[y + 1][x] = map[y][x];
-      map[y][x] = new Air();
-    } else if (this.falling.isFalling()) {
-      this.falling = new Resting();
-    }  
+    this.fallStrategy.update(this, x, y);
   }
   isAir() { return false; }
   isLock1()  { return false; }
@@ -196,8 +171,6 @@ class Key1 implements Tile {
     removeLock1();
     moveToTile(playerx, playery + dy);
   }
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return false; };
   isLock1()  { return false; };
@@ -211,8 +184,6 @@ class Lock1 implements Tile {
   }    
   moveHorizontal(dx: number): void {}
   moveVertical(dy: number) {}
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return false; };
   isLock1()  { return true; };
@@ -232,8 +203,6 @@ draw(g: CanvasRenderingContext2D, x: number, y: number) {
     removeLock2();
     moveToTile(playerx, playery + dy);
   }
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}  
   isAir() { return false; };
   isLock1()  { return false; };
@@ -247,8 +216,6 @@ class Lock2 implements Tile {
   }    
   moveHorizontal(dx: number): void {}
   moveVertical(dy: number) {}
-  drop() {}
-  canFall() { return false; }
   update(x: number, y: number) {}
   isAir() { return false; };
   isLock1()  { return false; };
@@ -360,13 +327,9 @@ function update() {
 function updateMap() {
   for (let y = map.length - 1; y >= 0; y--) {
     for (let x = 0; x < map[y].length; x++) {
-      updateTile(y, x);
+      map[y][x].update(x, y);
     }
   }
-}
-
-function updateTile(y: number, x: number) {
-  map[y][x].update(x, y);
 }
 
 function handleInputs() {
