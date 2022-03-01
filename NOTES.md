@@ -93,10 +93,13 @@ Join ifs with identical bodies (may require refactoring to achieve)
 ### Rule: 5.3.2 USE PURE CONDITIONS
 ***No side effects, please!***
 
-### Rule: 5.4.2 NO INTERFACE WITH ONLY ONE IMPLEMENTATION
+### 5.4.2 INTRODUCE STRATEGY PATTERN
+
+### Rule: 5.4.3 NO INTERFACE WITH ONLY ONE IMPLEMENTATION
 Never have an interface with only one implementation
 
-### 5.4.4 EXTRACT INTERFACE FROM IMPLEMENTATION
+### Rule: 5.4.4 EXTRACT INTERFACE FROM IMPLEMENTATION
+Allows you to postpone introducing interfaces until they are needed
 1. Create a new interface with the same name as the class we are extracting from
 2. Rename the class from which we want to extract the interface, and make it implement the new interface
 3. Compile, and go through the errors:
