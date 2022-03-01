@@ -11,6 +11,8 @@ Either ***call*** methods on an object or ***pass*** the object, not both
 - Complete - Capture all the functions does
 - Understandable - Be undestandable for someone working in the domain
 
+### Chapter 2 notes
+Localizing invariants. Classes pulls functionality conserning the same data and thereby also pull invariants closer and localize them.
 ### Rule: 4.1.1 Never use if with else
 Unless we are checking against a data type we do not control.
 If elses are hardcoded decisions
