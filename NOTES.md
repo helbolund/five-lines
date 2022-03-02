@@ -61,7 +61,10 @@ If a language does ***not*** allow omitting `default` then ***don't*** use `swit
 If a language does allow omitting `default` then `return` in every `case`.
 
 ### Rule: 4.3.2 ONLY INHERIT FROM INTERFACES
-See chapter 4.3.2!
+If inheriting from a class or abstract class you can accidentally forget a property or override some functionality!
+Shared code causes coupling
+Methods implemented in super classes are defaults which is bad
+
 ### 4.5.1 TRY DELETE THEN COMPILE
 Editors has a hard time showing unused methods in iterfaces
 
@@ -108,3 +111,9 @@ Allows you to postpone introducing interfaces until they are needed
     1. If the error is caused by a `new`, change the instantiation to the new class name
     2. Otherwise, add the method that is causing the error to the interface
 
+
+
+ ## A word on code dublication
+ Code dublication is bad because it encourages divergence.
+
+ MHL: Contrary: Code sharing is bad because it encourages convegence...
