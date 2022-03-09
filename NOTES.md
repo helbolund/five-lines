@@ -111,9 +111,14 @@ Allows you to postpone introducing interfaces until they are needed
     1. If the error is caused by a `new`, change the instantiation to the new class name
     2. Otherwise, add the method that is causing the error to the interface
 
+### 6.1.3 ELIMINATE GETTER AND SETTER
+*Getters* breaks encapsulation and we are making our invariant global.
+*Setters* introduce another layer of indirection, but often getters will be modified to return the new structure.
+1. Make getter or setter private to get errors everywhere it is used
+2. Fix the errors with PUSH CODE INTO CLASSES
+3. The getter and setter is inlined as part of PUSH CODE INTO CLASSES It is therefore unused, so delete it to avoid other people trying to use it
 
-
- ## A word on code dublication
+# A word on code dublication
  Code dublication is bad because it encourages divergence.
 
  MHL: Contrary: Code sharing is bad because it encourages convegence...
