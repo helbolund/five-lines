@@ -245,6 +245,10 @@ class Player {
   getY() { return this.y; }
   setX(x: number) { this.x = x; }
   setY(y: number) { this.y = y; }
+  draw(g: CanvasRenderingContext2D) {
+    g.fillStyle = "#ff0000";
+    g.fillRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  }
 }
 
 let player = new Player();
@@ -368,7 +372,7 @@ function createGraphics() {
 function draw(player: Player) {
   let g = createGraphics();
   drawMap(g);
-  drawPlayer(player, g);
+  player.draw(g);
 }
 
 function drawMap(g: CanvasRenderingContext2D) {
@@ -377,11 +381,6 @@ function drawMap(g: CanvasRenderingContext2D) {
       map[y][x].draw(g, x, y);
     }
   }
-}
-
-function drawPlayer(player: Player, g: CanvasRenderingContext2D) {
-  g.fillStyle = "#ff0000";
-  g.fillRect(player.getX() * TILE_SIZE, player.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
 
 function gameLoop() {
