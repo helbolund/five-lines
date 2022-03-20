@@ -257,7 +257,7 @@ class Player {
       this.moveToTile(this.x + dx, this.y);
     }
   }
-  moveToTile(newx: number, newy: number) {
+  private moveToTile(newx: number, newy: number) {
     map[this.y][this.x] = new Air();
     map[newy][newx] = new PlayerTile();
     this.x = newx;
