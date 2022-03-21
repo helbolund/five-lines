@@ -118,6 +118,16 @@ Allows you to postpone introducing interfaces until they are needed
 2. Fix the errors with PUSH CODE INTO CLASSES
 3. The getter and setter is inlined as part of PUSH CODE INTO CLASSES It is therefore unused, so delete it to avoid other people trying to use it
 
+### 6.2.3 ENCAPSULATE DATA
+1. Create a class
+2. Move the variable in the new class, replacing let with private. Simplify the variables' names; also make getters and setters for the variable
+3. Because the variables are no longer in the global scope, the compliler helps us find all the references by giving errors. Fix these errors in the following five steps:
+    1. Pick a good variable name for an instance of the new class
+    2. Replace access with getters and setters on the pretend variable
+    3. If we have errors in two or more different methods, add a parameter with the variable name from earlier as the first parameter, and put the same variable as the first argument in call sites
+    4. Repeat until only one method error
+    5. If we encapsulated variables, instantiate the new class at the point where the variables were declared. Otherwise, put the instantiation in the method that errors
+
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
