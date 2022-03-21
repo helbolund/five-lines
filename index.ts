@@ -295,6 +295,13 @@ class Map {
       }
     }
   }
+  draw(g: CanvasRenderingContext2D) {
+    for (let y = 0; y < this.map.length; y++) {
+      for (let x = 0; x < this.map[y].length; x++) {
+        this.map[y][x].draw(g, x, y);
+      }
+    }
+  }  
 }
 let map = new Map();
 
@@ -383,16 +390,8 @@ function createGraphics() {
 
 function draw(map: Map, player: Player) {
   let g = createGraphics();
-  drawMap(map, g);
+  map.draw(g);
   player.draw(g);
-}
-
-function drawMap(map: Map, g: CanvasRenderingContext2D) {
-  for (let y = 0; y < map.getMap().length; y++) {
-    for (let x = 0; x < map.getMap()[y].length; x++) {
-      map.getMap()[y][x].draw(g, x, y);
-    }
-  }
 }
 
 function gameLoop(map: Map) {
