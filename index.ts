@@ -276,8 +276,11 @@ let rawMap: RawTile[][] = [
 ];
 
 class Map {
+  private map: Tile[][];
+  getMap() { return this.map; }
+  setMap(map: Tile[][]) { this.map = map; }
 }
-let map: Tile[][];
+
 
 function assertExhausted(x: never): never {
   throw new Error("Unexpected object: " + x);
