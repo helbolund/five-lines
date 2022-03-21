@@ -102,8 +102,7 @@ class Falling implements FallingState {
   isFalling() { return true; }
   moveHorizontal(map: Map, player: Player, tile: Tile, dx: number) {}
   drop(map: Map, tile: Tile, x: number, y: number): void {
-    map.getMap()[y + 1][x] = tile;
-    map.getMap()[y][x] = new Air();
+    map.drop(tile, x, y);
   }
 }
 
@@ -200,7 +199,7 @@ class LockTile implements Tile {
 
 class FallStrategy {
   constructor(private falling: FallingState) { }
-  update(map: Map, tile: Tile, x: number, y: number) {
+  update(map: Map, tile: Tile, x: number, y: number) {    
     this.falling = map.getMap()[y +1][x].getBlockOnTopState();
     this.falling.drop(map, tile, x, y);
   }
@@ -277,7 +276,7 @@ let rawMap: RawTile[][] = [
 
 class Map {
   private map: Tile[][];
-  getMap() { return this.map; }
+  private getMap() { return this.map; }
   private setMap(map: Tile[][]) { this.map = map; }
   transform() {
     this.map = new Array(rawMap.length);
@@ -301,7 +300,11 @@ class Map {
         this.map[y][x].draw(g, x, y);
       }
     }
-  }  
+  }
+  drop(tile: Tile, x: number, y: number) {
+    this.map[y + 1][x] = tile;
+    this.map[y][x] = new Air();
+  }
 }
 let map = new Map();
 
