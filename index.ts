@@ -275,8 +275,6 @@ let rawMap: RawTile[][] = [
 
 class Map {
   private map: Tile[][];
-  private getMap() { return this.map; }
-  private setMap(map: Tile[][]) { this.map = map; }
   transform() {
     this.map = new Array(rawMap.length);
     for (let y = 0; y < rawMap.length; y++) {
