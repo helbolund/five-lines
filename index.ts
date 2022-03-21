@@ -280,6 +280,7 @@ class Map {
   getMap() { return this.map; }
   setMap(map: Tile[][]) { this.map = map; }
 }
+let map = new Map();
 
 function assertExhausted(x: never): never {
   throw new Error("Unexpected object: " + x);
