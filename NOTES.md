@@ -128,6 +128,19 @@ Allows you to postpone introducing interfaces until they are needed
     4. Repeat until only one method error
     5. If we encapsulated variables, instantiate the new class at the point where the variables were declared. Otherwise, put the instantiation in the method that errors
 
+# Part 1
+## Chapter 7
+> The halting problem
+>
+> In general, programs are fundamentally unpredictable
+
+### 7.1.3 Strength: Definite assignment
+Jeg forstår ikke hans tekstuelle kodeeksempel om at wrappe i en klasse ogg lave et objekt John!
+### 7.1.4 Strength: Access Control
+> **private** applies to the class *not* the object
+### 7.1.5 Strength: Type Checking proves properties
+Teaching the compiler properties of our program is the highest level of security we can get!
+
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
