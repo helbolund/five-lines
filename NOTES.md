@@ -128,6 +128,127 @@ Allows you to postpone introducing interfaces until they are needed
     4. Repeat until only one method error
     5. If we encapsulated variables, instantiate the new class at the point where the variables were declared. Otherwise, put the instantiation in the method that errors
 
+# Part 1
+## Chapter 7
+> The halting problem6.1.3 ELIMINATE GETTER AND SETTER
+>
+> In general, programs are fundamentally unpredictable
+
+### 7.1.3 Strength: Definite assignment
+Jeg forstår ikke hans tekstuelle kodeeksempel om at wrappe i en klasse ogg lave et objekt John!
+### 7.1.4 Strength: Access Control
+> **private** applies to the class *not* the object
+### 7.1.5 Strength: Type Checking proves properties
+Teaching the compiler properties of our program is the highest level of security we can get!
+### 7.1.6 *Weakness* : Dereferencing null crashes our application
+Foreslår Christian at vi altid checker for _**null** f.eks. at **arr** ikke er **null** i nedenstående
+```
+function average(arr: number[]) {
+    return sum(arr) / arr.length;
+}
+```
+### 7.1.7 *Weakness* : Arithmetic errors cause overflows or crashes
+E.g. division by zero i nedensående hvis kaldt med `average(f[])`
+```
+function average(arr: number[]) {
+    return sum(arr) / arr.length;
+}
+```
+
+Also consider adding and subtracting large numbers may cause overflow
+### 7.1.8 *Weakness*: Out-of-bounds error crash our application
+
+### 7.1.9 *Weakness*: Infinitie loops stall our application
+### 7.1.10 *Weakness*: Deadlocks and race conditions cause unintended behavior
+
+## The new team member - *The compiler*
+### Gain safety by using the compiler as a todo list
+E.g. to check all places for handling **default** in a enum, append _handled to the enum name. The compiler will tell all places, and as you check add _handled to the places. Finally remove _handled.
+
+### Gain safety by enforcing sequences
+See p. 183
+
+### Gain safety by enforcing encapsulation
+Localize invariants by using strict encapsulation.
+### Gain safety by letting the compiler detect unused code
+### Gain safety by definite values
+
+## Don't fight the compiler
+Happens when
+- not understanding types
+- being lazy
+- not understanding architecture
+
+### Understanding types
+Author has some points on casting, dynamic types (any in TypeScript, dynamic in C#)
+
+Run-time types: A method with, say 10 parameters, is changed to take a map. This might seem like a good idea, but you just prevented the compiler helping you do type checking, and now rely on runtime checks... 
+
+### Laziness
+Do use defaults as the compiler can't warn about wrong usage. Instead, don't be that lazy, and let the programmer answer the question every time. This might even expose holes in the understanding of the problem to be solved when the compiler asks us a question we can't answer.
+
+Don't use inheritance (R4.3.2 and section 4.41)
+
+Unchecked Exceptions - Fatter jeg ikke en bønne af!
+
+### Architecture
+Or more specifically the *micro architecutre*, that is architecture that affects this team, but not other teams. Avoided by 6.1.3 ELIMINATE GETTER AND SETTER.
+
+### Pass *this* instead of private fields to avoid breaking encapsulation
+## 7.3 Trusting the compiler
+### Teach the compiler invariants
+Whenever we have invariants in our program
+1. Eliminate them
+2. If you can't, then teach the compiler about them
+3. If you can't, then teach the runtime about them with an automated test
+4. If you can't, then teach the team about them by documenting them extensively
+5. If you can't, then teach the tester about them, and test them manually
+6. If you can't, then start praying because nothing earthbound can help you
+
+*Can't* in this context means infeasible rather than impossible.
+### Pay attention to warnings
+*alarm fatigue*
+# Intereassante pointer i kapitel 7
+Hvad sker der med CC's refenrecer? F.eks. til section 4.41 på side 187?
+
+Er lidt junior agtigt
+Præsenterer nogle interesante løsninger på problemerene, f.eks. 7.1.3
+
+The **compiler** should be part of the development team
+
+Programming is not construction, it is *communication*, on multiple levels:
+- We communicate with the computer when we tell it what to do
+- We communicate with other developers when they read our code
+- We communicate with the compiler whenever we ask it to read our code
+# Chapter 8 - Stay away from comments
+Comments are here considered comments inside methods and not Javadoc etc.
+
+Intermediate comments are great!
+
+Comments are not checked by the compiler, making them easier to write than code since there are no constraints on them.
+> "*A common fallacy is to assume authors of incomprehensible code will somehow be able to express themselves lucidly and clearly in comments.*"
+>
+> -Kevlin Henney
+
+### 8.1 Deleting outdated comments
+### 8.2 Deleting commented-out code
+### 8.3 Deleting tivial comments
+### 8.4 Transform comments into method names
+Languages have a property where the words used most often tend to be the shortest.
+
+Use comments for planning
+```
+/// Fetch data
+/// Check something
+///   Transform
+/// Else
+///   Submit
+```
+### 8.5 Keeping invariant-documenting comments
+non-local invariants
+
+Keep such comments if you fail step 1-3 in chapter **7.3 - Teach the compiler invariants**
+
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
