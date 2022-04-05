@@ -128,14 +128,14 @@ Allows you to postpone introducing interfaces until they are needed
     4. Repeat until only one method error
     5. If we encapsulated variables, instantiate the new class at the point where the variables were declared. Otherwise, put the instantiation in the method that errors
 
-# Part 1
+# Part 2
 ## Chapter 7
 > The halting problem6.1.3 ELIMINATE GETTER AND SETTER
 >
 > In general, programs are fundamentally unpredictable
 
 ### 7.1.3 Strength: Definite assignment
-Jeg forstår ikke hans tekstuelle kodeeksempel om at wrappe i en klasse ogg lave et objekt John!
+Jeg forstår ikke hans tekstuelle kodeeksempel om at wrappe i en klasse og lave et objekt John!
 ### 7.1.4 Strength: Access Control
 > **private** applies to the class *not* the object
 ### 7.1.5 Strength: Type Checking proves properties
@@ -189,7 +189,7 @@ Do use defaults as the compiler can't warn about wrong usage. Instead, don't be 
 
 Don't use inheritance (R4.3.2 and section 4.41)
 
-Unchecked Exceptions - Fatter jeg ikke en bønne af!
+***Question*** Unchecked Exceptions - Fatter jeg ikke en bønne af!
 
 ### Architecture
 Or more specifically the *micro architecutre*, that is architecture that affects this team, but not other teams. Avoided by 6.1.3 ELIMINATE GETTER AND SETTER.
