@@ -249,6 +249,55 @@ non-local invariants
 
 Keep such comments if you fail step 1-3 in chapter **7.3 - Teach the compiler invariants**
 
+# Chapter 9 - Love deleting code
+Code is a liability. We have to continuously maintian code regardless of whether it is valuable.
+God pointe omkring automatisering øverst side 201
+## 9.2 Deleting code to get rid of incidental complexity
+### Technical ignorance from inexperience
+E.g. when unknowingly making bad decisions by adding unnecessary coupling leading to poor architecture
+
+### Technical waste from time pressure
+Never skip best practices! Not even under time pressure!
+
+Do you want your new car three weeks sooner if it meant the breaks and airbags wouldn't be tested?
+
+### Technical waste from circumstanses
+Temporary suboptimal solutions are debt, permanent suboptimal solutions are waste!
+
+### Technical drag from growing
+Sparsely used features drags us when making change, hence they should be removed
+Automated tests (intentionally) make it harder to change code as we need to change the test as well. This is not necessarily bad as sometimes being slow and stable is prefered over being fast!
+
+## 9.3 Categorizing code based on intimacy
+Intimately familiar - Code we have recently developed
+
+Familiar - libraries and utilities we use often
+
+Unknown - Everything in between
+
+> Legacy code - Code that we are affraid to modify
+
+## 9.4 Deleting code in a legacy system
+### 9.4.1 Using the *strangler fig* pattern to get insight
+1. Encapsulate the classes in a new package/namespace
+2. Make a gate class in the new package and reduce all public modifers in the new package to be package-private
+3. Fix errors by adding public functions in the gate class
+4. Optionally adding all kinds of metrics on the public functions (call ok/fail, function called)
+
+### 9.4.2 Using the *strangler fig* pattern to improve the code
+Læs kapitel igen. Specielt sektionen om at øge kald til vigtig kode?!?!
+
+## 9.5 Delete code from a frozen project
+Hmmm hvad er pointen her?
+Det handler vel om at have overblik over hvad man har liggende i dvale rundt omkring, som potentielt giver drag
+Ha' en strategi for at holde øje med kode i dvale og få det slettet
+Samtidigt er der fokus på at implementere instrumentring i koden så man har styr på hvor meget det bliver brugt, også i spikes som har en lavere kvalitet (ikke refaktoreres, ikke testes)
+## 9.6 Deleting branches on version control
+Branches, like code, are technically almost free but are expensive in terms of
+- mental overhead
+- if long lived exposes ourselves to expensive, soul-crushing, error-prone merge conflicts
+And clutter causes more clutter
+
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
