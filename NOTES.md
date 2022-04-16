@@ -298,6 +298,9 @@ Branches, like code, are technically almost free but are expensive in terms of
 - if long lived exposes ourselves to expensive, soul-crushing, error-prone merge conflicts
 And clutter causes more clutter
 
+## 9.8 Deleting testing code
+Nået hertil
+
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
