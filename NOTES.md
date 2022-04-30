@@ -355,6 +355,9 @@ If classes are in our control make a new interface, change the variable to this 
 
 If classes are **not** in our control, push the type inspection code to the edge of our code to ensure that the core of our code base is pristine. See NEVER USE IF WITH ELSE.
 
+> # Questions:
+>
+> What is meant with "Data-encoded behavior can be used as a last resort and should be limited, as it is difficult to maintain safely due to lack of compiler support?
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
