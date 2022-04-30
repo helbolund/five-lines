@@ -301,6 +301,60 @@ And clutter causes more clutter
 ## 9.8 Deleting testing code
 Nået hertil
 
+# Chapter 10 - Never be affraid to add code
+
+# Chapter 11 - Follow the structure in the code
+## 11.1 Categorizing structure based on scope and origin
+Lidt om Conway's law
+Domain experts define how the software should function, which means the system mirrors the experts behavior... Radar SW...
+Inefficiencies in the code, can often find their real world source in the way the experts work... Hvad kan vi bruge det til?
+Radars users are external because we can't retrain them...
+## 11.2 Three ways code mirrors behavior
+Behavior can be embedded in three ways in code
+1. Control flow
+2. Structure of data
+3. In the data itself
+
+LÆS IGEN!
+## 11.3 Adding code to expose structure
+Ved impl af nye features er der stor usikkerhed og vi skal fokusere på korrekthed og udskyde refactoring. Ny kode testes ofte også intensivt. Som koden modnes, og strukturen bliver mere stabil, bør den refaktoreres 
+
+## 11.4 Observing instead of predicting, and using empirical techniques
+Skak historien
+Do not generalize unless you know it will be used as it otherwise adds unnecesssary code and accidental complexity.
+
+## 11.5 Gaining safety without understanding the code
+Refactoring moves behavior between control flow, data structures, and data. We can't refactor without making mistakes. Following are a few steps we can take, however non of them are failsafe, so we eventually have to accept the remaining risk.
+### 11.5.1 Safety through testing
+The risk is that the test may not cover where a mistake happens or not test what we expect them to.
+### 11.5.2 Safety through mastery
+Practice practice. Wax on, wax off. The risk remains the human refactorer.
+### 11.5.3 Safety through tool assisatance
+Risk is Tool bugs, Very low risk
+### 11.5.4 Safety through formal verification
+Risk is Tool bugs 
+### 11.5.5 Safety through fault tolerance
+Feature toogling allows for toogling to another, hopefully error free, method automatically that is...
+## 11.6 Indentifying unexploited structures
+Structures that come from the underlying domain, that is often older than the software, can safely be exploited.
+Processes and teams tend to have shorter lifespand and should not be baked into the code.
+
+How to look for exploitable structures
+### 11.6.1 Exploiting whitespaces with estraction and encapsualtion
+Look for blank lines
+### 11.6.2 Exploiting dublication with unification
+Use
+- EXTRACT METHOD
+- ENCAPSULATE DATA
+- UNIFY SIMILAR CLASSES
+### 11.6.3 Exploiting common affixes with encapsulation
+Use
+- NEVER HAVE COMMON AFFIXES
+### 11.6.4 Exploiting the runtime type with dynamic dispatch
+If classes are in our control make a new interface, change the variable to this type and make both classes implement the interface. Aka. use polymorphy.
+
+If classes are **not** in our control, push the type inspection code to the edge of our code to ensure that the core of our code base is pristine. See NEVER USE IF WITH ELSE.
+
 # A word on code dublication
  Code dublication is bad because it encourages divergence.
 
