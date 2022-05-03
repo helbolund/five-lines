@@ -334,15 +334,15 @@ Risk is Tool bugs, Very low risk
 ### 11.5.4 Safety through formal verification
 Risk is Tool bugs 
 ### 11.5.5 Safety through fault tolerance
-Feature toogling allows for toogling to another, hopefully error free, method automatically that is...
+Feature toggling allows for toggling to another, hopefully error free, method automatically that is...
 ## 11.6 Indentifying unexploited structures
 Structures that come from the underlying domain, that is often older than the software, can safely be exploited.
-Processes and teams tend to have shorter lifespand and should not be baked into the code.
+Processes and teams tend to have shorter lifespan and should not be baked into the code.
 
 How to look for exploitable structures
-### 11.6.1 Exploiting whitespaces with estraction and encapsualtion
+### 11.6.1 Exploiting whitespaces with extraction and encapsualtion
 Look for blank lines
-### 11.6.2 Exploiting dublication with unification
+### 11.6.2 Exploiting duplication with unification
 Use
 - EXTRACT METHOD
 - ENCAPSULATE DATA
